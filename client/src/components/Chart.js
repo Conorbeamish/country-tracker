@@ -1,26 +1,27 @@
-import React, {setState} from 'react';
+import React from 'react';
 import Chart from "react-google-charts";
-import {countries} from 'country-data';
 
 const ChartContainer = ({visitedCountries}) => {
 
   const visitedCountriesNames = visitedCountries.map(country => {
     return (
-      [countries[country].name]
+      //There are some exceptions that need handling but 2 lines below sufices for now
+      // [countries[country].name]
+      [country]
     )
   })
   return ( 
     <>
-    <Chart
-      style={{width: "100%"}}
-      chartType="GeoChart"
-      data={[
-        ['Country'],
-				...visitedCountriesNames
-      ]}
-      mapsApiKey="YOUR_KEY_HERE"
-      rootProps={{ 'data-testid': '1' }}
-    />
+      <Chart
+        style={{width: "100%"}}
+        chartType="GeoChart"
+        data={[
+          ['Country'],
+          ...visitedCountriesNames
+        ]}
+        mapsApiKey="YOUR_KEY_HERE"
+        rootProps={{ 'data-testid': '1' }}
+      />
     </>
   );
 }

@@ -1,21 +1,31 @@
-import allCountries from "../utils/countries";
+
 import Flag from 'react-world-flags'
 
-
-const CountrySelector = ({setVisitedCountries, visitedCountries, countries}) => {
-  const allCountriesSpread = allCountries.map(country => {
-    let countryCode = country[0]
+const CountrySelector = ({setVisitedCountries, visitedCountries, countryData, allCountriesFlat}) => {
+  const allCountries = allCountriesFlat.map(country => {
     return (
-      <button onClick={() => setVisitedCountries([...visitedCountries, [countryCode]])}> 
-        {countries[countryCode].name} 
-        {countryCode}
-        <Flag code={countryCode} fallback={ <span></span> } height="16"/>
-      </button>
+      visitedCountries.indexOf(country) < 0 ?  
+        <button className="flex border bg-gray-50  p-1 justify-between text-left" 
+          onClick={() => {
+            setVisitedCountries([...visitedCountries, country])
+          }}> 
+          {countryData[country].name} - {country}
+          <Flag className="h-4 inline" code={country} fallback={ <span></span> }/>
+        </button>
+      :  
+        <button className="flex border bg-green-300  p-1 justify-between text-left" 
+          onClick={() => {
+          const filteredCountries = visitedCountries.filter(el => el !== country)
+          setVisitedCountries([...filteredCountries])
+        }}> 
+        {countryData[country].name} - {country}
+        <Flag className="h-4 inline" code={country} fallback={ <span></span> }/>
+        </button>
     )
   })
   return (  
-    <div>
-      {allCountriesSpread}
+    <div className="grid grid-cols-4 gap-2">
+      {allCountries}
     </div>
   );
 }
