@@ -1,8 +1,11 @@
-
-import Flag from 'react-world-flags'
+import React, {useState} from 'react';
+import Flag from 'react-world-flags';
 
 const CountrySelector = ({setVisitedCountries, visitedCountries, countryData, allCountriesFlat}) => {
-  const allCountries = allCountriesFlat.map(country => {
+  const [searchResult, setSearchResult] = useState("");
+
+  const searchedCountries = allCountriesFlat.filter(country => countryData[country].name.toLowerCase().includes(searchResult.toLowerCase()))
+  const allCountries = searchedCountries.map(country => {
     return (
       visitedCountries.indexOf(country) < 0 ?  
         <button className="flex border bg-gray-50  p-1 justify-between text-left" 
@@ -23,10 +26,16 @@ const CountrySelector = ({setVisitedCountries, visitedCountries, countryData, al
         </button>
     )
   })
-  return (  
-    <div className="grid  gap-2 grid-cols-2 md:grid-cols-4">
-      {allCountries}
-    </div>
+  return ( 
+    <> 
+      <form className="py-2">
+        Search for a country...
+        <input className="mx-2" type="text" value={searchResult} className="border border-gray-500" onChange={(e) => setSearchResult(e.target.value) } />
+      </form>
+      <div className="grid  gap-2 grid-cols-2 md:grid-cols-4">
+        {allCountries}
+      </div>
+    </>
   );
 }
  

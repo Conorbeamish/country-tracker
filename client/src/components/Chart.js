@@ -13,7 +13,7 @@ const ChartContainer = ({visitedCountries}) => {
   return ( 
     <>
       <Chart
-        style={{width: "100%"}}
+        style={{width: "100%", height:"auto"}}
         chartType="GeoChart"
         data={[
           ['Country'],

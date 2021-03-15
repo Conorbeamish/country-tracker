@@ -1,22 +1,23 @@
-import ChartContainer from "./components/Chart";
 import Nav from "./components/Nav";
-import {countries as countryData } from 'country-data';
-import allCountries from "./utils/countries";
 import React, {useState} from 'react';
-import CountrySelector from "./components/CountrySelector";
-import UserStats from "./components/UserStats";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Landing from "./components/Landing";
 
 const App = () => {
-  const [visitedCountries, setVisitedCountries] = useState([]);
-  const allCountriesFlat = allCountries.flat();
   return (
-    <>
+    <Router>
       <Nav />
-      <h1>Where have you been?</h1>
-      <UserStats visitedCountries={visitedCountries} allCountries={allCountries} />
-      <ChartContainer visitedCountries={visitedCountries}/>
-      <CountrySelector  countryData = {countryData} visitedCountries={visitedCountries} setVisitedCountries={setVisitedCountries} allCountriesFlat={allCountriesFlat}/>
-    </>
+      <Switch>
+        <Route path="/">
+          <Landing/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
