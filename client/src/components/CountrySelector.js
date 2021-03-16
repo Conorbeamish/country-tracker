@@ -30,7 +30,7 @@ const CountrySelector = ({setVisitedCountries, visitedCountries, countryData, al
     <> 
       <form className="py-2">
         Search for a country...
-        <input className="mx-2" type="text" value={searchResult} className="border border-gray-500" onChange={(e) => setSearchResult(e.target.value) } />
+        <input className="mx-2 border border-gray-500" type="text" value={searchResult} onChange={(e) => setSearchResult(e.target.value) } />
       </form>
       <div className="grid  gap-2 grid-cols-2 md:grid-cols-4">
         {allCountries}
